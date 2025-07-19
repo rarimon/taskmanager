@@ -1,11 +1,11 @@
 import React from 'react';
 
-const App = () => {
+const CreateTask = () => {
     return (
         <div>
-            sd
+            c
         </div>
     );
 };
 
-export default App;
+export default CreateTask;
