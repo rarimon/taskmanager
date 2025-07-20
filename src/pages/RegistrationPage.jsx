@@ -1,14 +1,13 @@
-import React, {Fragment} from 'react';
-import MainLayout from "../compnents/masterLayout/MainLayout.jsx";
-import CompletedTask from "../compnents/Completed/CompletedTask.jsx";
-import RegistrationForm from "../compnents/Registration/RegistrationForm.jsx";
+import React, {Fragment, Suspense} from 'react';
+const RegistrationForm = React.lazy(() => import('../compnents/Registration/RegistrationForm.jsx'));
+import LazyLoader from "../compnents/masterLayout/LazyLoader.jsx";
 
 const RegistrationPage = () => {
     return (
         <Fragment>
-
+            <Suspense fallback={<LazyLoader/>}>
                 <RegistrationForm/>
-
+            </Suspense>
         </Fragment>
     );
 };

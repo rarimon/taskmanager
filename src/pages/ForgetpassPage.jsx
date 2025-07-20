@@ -1,10 +1,15 @@
-import React, {Fragment} from 'react';
-import ForgatePasswordForm from "../compnents/ForgatePassword/ForgatePasswordForm.jsx";
+import React, {Fragment, Suspense} from 'react';
+import LazyLoader from "../compnents/masterLayout/LazyLoader.jsx";
+const ForgatePasswordForm = React.lazy(() => import('../compnents/ForgatePassword/ForgatePasswordForm.jsx'));
 
 const ForgetpassPage = () => {
     return (
         <Fragment>
-             <ForgatePasswordForm />
+
+            <Suspense fallback={<LazyLoader/>}>
+                <ForgatePasswordForm />
+            </Suspense>
+
         </Fragment>
     );
 };

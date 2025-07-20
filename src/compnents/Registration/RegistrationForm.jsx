@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {NavLink} from "react-router";
 
 const RegistrationForm = () => {
     return (
@@ -53,9 +54,9 @@ const RegistrationForm = () => {
 
                     <p className="text-center mt-3">
                         Already have an account?{" "}
-                        <a href="/login" className="text-decoration-none">
+                        <NavLink to={"/login"} className="text-decoration-none">
                             Login
-                        </a>
+                        </NavLink>
                     </p>
                 </div>
             </div>

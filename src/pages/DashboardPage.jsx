@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Suspense} from 'react';
 import MainLayout from "../compnents/masterLayout/MainLayout.jsx";
-import Dashboard from "../compnents/Dashboard/Dashboard.jsx";
-
+import LazyLoader from "../compnents/masterLayout/LazyLoader.jsx";
+const Dashboard = React.lazy(() => import('../compnents/Dashboard/Dashboard.jsx'));
 
 
 const DashboardPage = () => {
@@ -10,7 +10,10 @@ const DashboardPage = () => {
     return (
         <Fragment>
            <MainLayout>
-              <Dashboard/>
+               <Suspense fallback={<LazyLoader/>}>
+                   <Dashboard/>
+               </Suspense>
+
            </MainLayout>
 
         </Fragment>

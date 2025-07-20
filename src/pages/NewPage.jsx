@@ -1,12 +1,15 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Suspense} from 'react';
 import MainLayout from "../compnents/masterLayout/MainLayout.jsx";
-import NewTask from "../compnents/New/NewTask.jsx";
+const NewTask = React.lazy(() => import('../compnents/New/NewTask.jsx'));
+import LazyLoader from "../compnents/masterLayout/LazyLoader.jsx";
 
 const NewPage = () => {
     return (
         <Fragment>
             <MainLayout>
-                <NewTask/>
+                <Suspense fallback={<LazyLoader/>}>
+                    <NewTask/>
+                </Suspense>
             </MainLayout>
         </Fragment>
     );

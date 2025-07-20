@@ -1,13 +1,16 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Suspense} from 'react';
 import MainLayout from "../compnents/masterLayout/MainLayout.jsx";
-
-import NotFound from "../compnents/NotFound/NotFound.jsx";
+const NotFound = React.lazy(() => import('../compnents/NotFound/NotFound.jsx'));
+import LazyLoader from "../compnents/masterLayout/LazyLoader.jsx";
 
 const Page404 = () => {
     return (
         <Fragment>
             <MainLayout>
-                <NotFound />
+                <Suspense fallback={<LazyLoader/>}>
+                    <NotFound />
+                </Suspense>
+
             </MainLayout>
         </Fragment>
     );
