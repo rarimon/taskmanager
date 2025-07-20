@@ -6,9 +6,9 @@ import RegistrationForm from "../compnents/Registration/RegistrationForm.jsx";
 const RegistrationPage = () => {
     return (
         <Fragment>
-            <MainLayout>
+
                 <RegistrationForm/>
-            </MainLayout>
+
         </Fragment>
     );
 };

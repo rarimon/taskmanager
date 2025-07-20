@@ -6,8 +6,8 @@ const CanceledTask = () => {
             <div className="container mt-4">
                 <div className="row">
 
-                    <div className="col-lg-4">
-                        <div className="card">
+                    <div className="col-lg-4 ">
+                        <div className="card shadow-sm">
                             <div className="card-header">
                                 <h1>Task Name</h1>
                             </div>
@@ -17,7 +17,7 @@ const CanceledTask = () => {
                         </div>
                     </div>
                     <div className="col-lg-4">
-                        <div className="card">
+                        <div className="card shadow-sm">
                             <div className="card-header">
                                 <h1>Task Name</h1>
                             </div>
@@ -27,7 +27,7 @@ const CanceledTask = () => {
                         </div>
                     </div>
                     <div className="col-lg-4">
-                        <div className="card">
+                        <div className="card shadow-sm">
                             <div className="card-header">
                                 <h1>Task Name</h1>
                             </div>

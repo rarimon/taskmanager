@@ -6,9 +6,7 @@ import LoginForm from "../compnents/Login/LoginForm.jsx";
 const LoginPage = () => {
     return (
         <Fragment>
-            <MainLayout>
                 <LoginForm/>
-            </MainLayout>
         </Fragment>
     );
 };

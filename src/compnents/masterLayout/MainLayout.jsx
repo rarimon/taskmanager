@@ -58,9 +58,9 @@ const MainLayout = (props) => {
                             </NavLink>
                         </div>
                         <div>
-                            <button className="btn btn-success" type="submit">
+                            <NavLink to={"/login"} className="btn btn-success" type="submit">
                                 Login
-                            </button>
+                            </NavLink>
                         </div>
                     </div>
                 </div>
