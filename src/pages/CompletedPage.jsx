@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import MainLayout from "../compnents/masterLayout/MainLayout.jsx";
+import CompletedTask from "../compnents/Completed/CompletedTask.jsx";
 
 const CompletedPage = () => {
     return (
-        <div>
-            sdfsdf
-        </div>
+        <Fragment>
+            <MainLayout>
+                <CompletedTask/>
+            </MainLayout>
+        </Fragment>
     );
 };
 

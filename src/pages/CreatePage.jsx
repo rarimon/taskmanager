@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import MainLayout from "../compnents/masterLayout/MainLayout.jsx";
+import CreateTask from "../compnents/Create/CreateTask.jsx";
 
 const CreatePage = () => {
     return (
-        <div>
-            sdf
-        </div>
+        <Fragment>
+            <MainLayout>
+              <CreateTask />
+            </MainLayout>
+        </Fragment>
     );
 };
 

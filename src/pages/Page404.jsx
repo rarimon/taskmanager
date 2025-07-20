@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import MainLayout from "../compnents/masterLayout/MainLayout.jsx";
+
+import NotFound from "../compnents/NotFound/NotFound.jsx";
 
 const Page404 = () => {
     return (
-        <div>
-            sdfsd
-        </div>
+        <Fragment>
+            <MainLayout>
+                <NotFound />
+            </MainLayout>
+        </Fragment>
     );
 };
 

@@ -8,8 +8,8 @@ import CanceledPage from "./pages/CanceledPage.jsx";
 import CompletedPage from "./pages/CompletedPage.jsx";
 import NewPage from "./pages/NewPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
-import ForgetpassPage from "./pages/ForgetpassPage.jsx";
 import Page404 from "./pages/Page404.jsx";
+import ForgetpassPage from "./pages/ForgetpassPage.jsx";
 
 const App = () => {
     return (
@@ -19,10 +19,10 @@ const App = () => {
                     <Route path="/" element={<DashboardPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/registraion" element={<RegistrationPage />} />
-                    <Route path="/careate" element={<CreatePage />} />
+                    <Route path="/create" element={<CreatePage />} />
                     <Route path="/cancel" element={<CanceledPage />} />
                     <Route path="/complate" element={<CompletedPage />} />
-                    <Route path="/all" element={<NewPage />} />
+                    <Route path="/new" element={<NewPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/forgate" element={<ForgetpassPage />} />
                     <Route path="*" element={<Page404 />} />
