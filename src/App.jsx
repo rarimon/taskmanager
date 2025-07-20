@@ -10,10 +10,13 @@ import NewPage from "./pages/NewPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import Page404 from "./pages/Page404.jsx";
 import ForgetpassPage from "./pages/ForgetpassPage.jsx";
+import {ToastContainer} from "react-toastify";
 
 const App = () => {
     return (
         <Fragment>
+
+            {/* Main application routes start*/}
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<DashboardPage />} />
@@ -28,6 +31,11 @@ const App = () => {
                     <Route path="*" element={<Page404 />} />
                 </Routes>
             </BrowserRouter>
+            {/* Main application routes start*/}
+
+            {/* Toast Container for notifications */}
+            <ToastContainer />
+
         </Fragment>
     );
 };
