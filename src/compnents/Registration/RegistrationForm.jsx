@@ -1,14 +1,15 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {NavLink} from "react-router";
 import {isEmpty, isValidBDPhone, isValidEmail} from "../../helper/FormHelper.js";
 import { showError} from "../../helper/AlertHelper.js";
+import {RegisterUser} from "../../apirequest/apiRequest.js";
 
 const RegistrationForm = () => {
 
     // State to hold input values
     const [inputValues, setInputValues] =useState({
-        firstName: '',
-        lastName: '',
+        firstname: '',
+        lastname: '',
         email: '',
         phone: '',
         password: '',
@@ -36,15 +37,18 @@ const RegistrationForm = () => {
     }
 
 
+
+
+
     // Function to handle form submission
-    const formSubmitHandler=(e)=>{
+    const formSubmitHandler=async(e)=>{
         e.preventDefault();
 
         // form validation
-        if(isEmpty(inputValues.firstName)){
+        if(isEmpty(inputValues.firstname)){
             showError("First name is required");
         }
-        else if(isEmpty(inputValues.lastName)){
+        else if(isEmpty(inputValues.lastname)){
             showError("Last name is required");
         }
         else if(isEmpty(inputValues.email)){
@@ -71,16 +75,17 @@ const RegistrationForm = () => {
 
 
         else{
-            // If all validations pass, you can proceed with form submission
-            console.log("Form submitted successfully", inputValues);
-            // Here you can add your API call or any other logic
+            // If all validations pass, proceed with registration
+            try {
+                await RegisterUser(inputValues);
+                window.location.href = "/login";
+            } catch (err) {
+               console.log({err:err})
+            }
         }
 
 
     }
-
-
-
 
 
     return (
@@ -91,20 +96,20 @@ const RegistrationForm = () => {
                     <form onSubmit={formSubmitHandler}>
                         <div className="row mb-3">
                             <div className="col-md-6">
-                                <label htmlFor="firstName" className="form-label">First Name</label>
-                                <input onChange={handleInputChange} type="text" name="firstName"
-                                    id="firstName"
+                                <label htmlFor="firstname" className="form-label">First Name</label>
+                                <input onChange={handleInputChange} type="text" name="firstname"
+                                    id="firstname"
                                     className="form-control"
                                     placeholder="Enter first name"
                                 />
                             </div>
                             <div className="col-md-6">
-                                <label htmlFor="lastName" className="form-label">Last Name</label>
+                                <label htmlFor="lastname" className="form-label">Last Name</label>
                                 <input
                                     onChange={handleInputChange}
                                     type="text"
-                                    name="lastName"
-                                    id="lastName"
+                                    name="lastname"
+                                    id="lastname"
                                     className="form-control"
                                     placeholder="Enter last name"
                                 />
