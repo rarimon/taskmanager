@@ -11,10 +11,14 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import Page404 from "./pages/Page404.jsx";
 import ForgetpassPage from "./pages/ForgetpassPage.jsx";
 import {ToastContainer} from "react-toastify";
+import FullScreenLoader from "./compnents/masterLayout/FullScreenLoader.jsx";
 
 const App = () => {
     return (
         <Fragment>
+
+            {/* Full screen loader component */}
+            <FullScreenLoader/>
 
             {/* Main application routes start*/}
             <BrowserRouter>
