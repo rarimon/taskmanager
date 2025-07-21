@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import {Link, NavLink} from "react-router";
 
+
 const MainLayout = (props) => {
     return (
         <Fragment>
@@ -58,9 +59,7 @@ const MainLayout = (props) => {
                             </NavLink>
                         </div>
                         <div>
-                            <NavLink to={"/login"} className="btn btn-success" type="submit">
-                                Login
-                            </NavLink>
+                           <NavLink to={"/login"} className="btn btn-success" type="submit">Login</NavLink>
                         </div>
                     </div>
                 </div>

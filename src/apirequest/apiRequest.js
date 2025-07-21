@@ -62,7 +62,7 @@ export const LoginUser = async (userData) => {
         store.dispatch(hideLoader());
         // Store user data in localStorage
          let token = response.data.token;
-        setToken(token);
+         setToken(token);
         return response.data;
 
     } catch (error) {
