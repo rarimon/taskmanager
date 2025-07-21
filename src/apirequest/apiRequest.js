@@ -1,8 +1,8 @@
 import axios   from "axios";
 import {showSuccess, showWarning} from "../helper/AlertHelper.js";
-
 import {hideLoader, showLoader} from "../redux/state-slice/settingSlice.js";
 import store from "../redux/store/store.js";
+import {setToken} from "../helper/SessionHelper.js";
 
 const BASE_URL = "https://task-manger-rest-api-project.onrender.com/api/v1";
 
@@ -40,3 +40,37 @@ export const RegisterUser = async (userData) => {
 }
 
 //user login
+export const LoginUser = async (userData) => {
+    try {
+        // show loader
+        store.dispatch(showLoader());
+
+        // Validate user data
+        const response = await axios.post(`${BASE_URL}/Login`, userData);
+        if (response.data.status === "error") {
+            const msg = response.data.message || "Login failed";
+            showWarning(msg);
+
+            // Hide loader
+            store.dispatch(hideLoader());
+
+            throw new Error(msg);
+        }
+
+        showSuccess("Login successful!");
+        // Hide loader
+        store.dispatch(hideLoader());
+        // Store user data in localStorage
+         let token = response.data.token;
+        setToken(token);
+        return response.data;
+
+    } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
+        showWarning(errorMsg);
+        // Hide loader
+        store.dispatch(hideLoader());
+        throw error;
+    }
+
+}
