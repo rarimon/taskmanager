@@ -14,7 +14,6 @@ const NewTask = () => {
 
     const newTasks =useSelector((state)=>state.tasks.New);
 
-    console.log(newTasks);
 
     return (
         <Fragment>
@@ -26,6 +25,7 @@ const NewTask = () => {
                                 return (
                                     <div className="col-lg-3">
                                     <Card
+                                        key={index}
                                         title={item.title}
                                         description={item.description}
                                         date={DateTimeFormater(item.createdAt)}

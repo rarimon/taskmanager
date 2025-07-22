@@ -2,6 +2,7 @@ import React, {Fragment, useEffect} from 'react';
 import {Tasklist} from "../../apirequest/apiRequest.js";
 import {useSelector} from "react-redux";
 import Card from "../card/Card.jsx";
+import {DateTimeFormater} from "../../helper/DateFormatHelper.js";
 
 const CompletedTask = () => {
 
@@ -12,7 +13,7 @@ const CompletedTask = () => {
     }, []);
 
     const complateTasks =useSelector((state)=>state.tasks.Complete);
-    console.log(complateTasks);
+
 
 
     return (
@@ -25,9 +26,10 @@ const CompletedTask = () => {
                             return (
                                 <div className="col-lg-3">
                                     <Card
+                                        key={index}
                                         title={item.title}
                                         description={item.description}
-                                        date={item.createdAt}
+                                        date={DateTimeFormater(item.createdAt)}
                                         onEdit={() => alert('Edit clicked')}
                                         onDelete={() => alert('Delete clicked')}
                                         status={item.status}
@@ -37,7 +39,6 @@ const CompletedTask = () => {
                             )
                         })
                     }
-
 
 
                 </div>

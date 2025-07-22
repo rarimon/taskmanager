@@ -1,7 +1,20 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
+import {countTask} from "../../apirequest/apiRequest.js";
+import {useSelector} from "react-redux";
+import SummarCard from "../card/SummarCard.jsx";
 import Card from "../card/Card.jsx";
 
 const Dashboard = () => {
+    useEffect(() => {
+        (async ()=>{
+            countTask();
+        })()
+    }, []);
+
+    const countTasks =useSelector((state)=>state.summary.value);
+
+
+
     return (
         <Fragment>
 
@@ -10,15 +23,20 @@ const Dashboard = () => {
                     <div className="row">
                         <h1 className="mb-5">Welcome To Dashboard</h1>
 
-                        <Card
-                            title="ujkghk"
-                            description="hjgkhkgh"
-                            date="12-07-2022"
-                            onEdit={() => alert('Edit clicked')}
-                            onDelete={() => alert('Delete clicked')}
-                        />
+                        {
+                            countTasks.map((item, index)=>{
+                                return (
+                                    <div className="col-lg-3">
+                                        <SummarCard
+                                            key={index}
+                                            title={item._id}
+                                            total={item.sum}
 
-
+                                        />
+                                    </div>
+                                )
+                            })
+                        }
 
                     </div>
                 </div>
