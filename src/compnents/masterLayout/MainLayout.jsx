@@ -1,8 +1,22 @@
 import React, {Fragment} from 'react';
 import {Link, NavLink} from "react-router";
+import {getToken} from "../../helper/SessionHelper.js";
+
+const Token=getToken();
 
 
 const MainLayout = (props) => {
+
+    // Function to handle logout
+    const LogoutBtn=()=>{
+        // Clear the token from session storage
+        localStorage.removeItem("token");
+        // Redirect to login page
+        window.location.href = "/login";
+
+    }
+
+
     return (
         <Fragment>
             <nav className="navbar navbar-expand-lg bg-body-tertiary ">
@@ -59,7 +73,7 @@ const MainLayout = (props) => {
                             </NavLink>
                         </div>
                         <div>
-                           <NavLink to={"/login"} className="btn btn-success" type="submit">Login</NavLink>
+                            {Token !==null &&  <button onClick={LogoutBtn}  className="btn btn-success" type="submit">Log out</button>}
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import Card from "../card/Card.jsx";
 
 const NewTask = () => {
     return (
@@ -6,36 +7,13 @@ const NewTask = () => {
             <div className="container mt-4">
                 <div className="row">
 
-                    <div className="col-lg-4">
-                        <div className="card">
-                            <div className="card-header">
-                                <h1>Task Name</h1>
-                            </div>
-                            <div className="card-body">
-                               sdfsdf
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4">
-                        <div className="card">
-                            <div className="card-header">
-                                <h1>Task Name</h1>
-                            </div>
-                            <div className="card-body">
-                                sdfsdf
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4">
-                        <div className="card">
-                            <div className="card-header">
-                                <h1>Task Name</h1>
-                            </div>
-                            <div className="card-body">
-                                sdfsdf
-                            </div>
-                        </div>
-                    </div>
+                    <Card
+                        title="ujkghk"
+                        description="hjgkhkgh"
+                        date="12-07-2022"
+                        onEdit={() => alert('Edit clicked')}
+                        onDelete={() => alert('Delete clicked')}
+                    />
 
 
                 </div>
