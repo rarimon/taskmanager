@@ -1,19 +1,44 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import Card from "../card/Card.jsx";
+import {Tasklist} from "../../apirequest/apiRequest.js";
+import {useSelector} from "react-redux";
+import {DateFormater, DateTimeFormater} from "../../helper/DateFormatHelper.js";
 
 const NewTask = () => {
+
+    useEffect(() => {
+        (async ()=>{
+            Tasklist("New")
+        })()
+    }, []);
+
+    const newTasks =useSelector((state)=>state.tasks.New);
+
+    console.log(newTasks);
+
     return (
         <Fragment>
             <div className="container mt-4">
                 <div className="row">
 
-                    <Card
-                        title="ujkghk"
-                        description="hjgkhkgh"
-                        date="12-07-2022"
-                        onEdit={() => alert('Edit clicked')}
-                        onDelete={() => alert('Delete clicked')}
-                    />
+                        {
+                            newTasks.map((item, index)=>{
+                                return (
+                                    <div className="col-lg-3">
+                                    <Card
+                                        title={item.title}
+                                        description={item.description}
+                                        date={DateTimeFormater(item.createdAt)}
+                                        onEdit={() => alert('Edit clicked')}
+                                        onDelete={() => alert('Delete clicked')}
+                                        status={item.status}
+                                        statusbgcolor="bg-info"
+                                    />
+                                    </div>
+                                )
+                            })
+                        }
+
 
 
                 </div>

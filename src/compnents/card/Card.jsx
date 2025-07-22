@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
 
-const Card = ({ title, description, date, onEdit, onDelete }) => {
+const Card = ({ title, description, date, onEdit, onDelete,status,statusbgcolor }) => {
     return (
         <Fragment>
-            <div className="card shadow-sm rounded-1 p-3 mb-4" style={{ maxWidth: '350px' }}>
+            <div className="card shadow-sm rounded-1 p-3 mb-4 " style={{ maxWidth: '450px' }}>
                 <h6 className="fw-bold text-dark">{title}</h6>
                 <p className="text-muted mb-2">{description}</p>
 
@@ -22,7 +22,7 @@ const Card = ({ title, description, date, onEdit, onDelete }) => {
                         </button>
                     </div>
 
-                    <span className="badge bg-info text-white ms-2">NEW</span>
+                    <span className={`badge ${statusbgcolor} text-white ms-2`}>{status}</span>
                 </div>
             </div>
         </Fragment>

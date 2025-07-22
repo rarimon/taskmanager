@@ -3,9 +3,15 @@ import {showSuccess, showWarning} from "../helper/AlertHelper.js";
 import {hideLoader, showLoader} from "../redux/state-slice/settingSlice.js";
 import store from "../redux/store/store.js";
 import {getToken, setToken} from "../helper/SessionHelper.js";
+import {setCompleteTasks, setNewTasks} from "../redux/state-slice/taskSlice.js";
 
 const Token=getToken();
 const BASE_URL = "https://task-manger-rest-api-project.onrender.com/api/v1";
+
+// Check if token is available
+let Headers = {
+    headers: {token: Token}
+}
 
 //user registration
 export const RegisterUser = async (userData) => {
@@ -84,10 +90,7 @@ export const createTask = async (userData) => {
         // show loader
         store.dispatch(showLoader());
 
-        // Check if token is available
-        let Headers = {
-            headers: {token: Token}
-        }
+
 
         // Validate user data
         const response = await axios.post(`${BASE_URL}/CreateTask`, userData, Headers);
@@ -106,6 +109,49 @@ export const createTask = async (userData) => {
         store.dispatch(hideLoader());
 
         return response.data;
+
+    } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
+        showWarning(errorMsg);
+        // Hide loader
+        store.dispatch(hideLoader());
+        throw error;
+    }
+
+}
+
+
+//TasklistByStatus
+export const Tasklist= async (userData) => {
+    try {
+        // show loader
+        store.dispatch(showLoader());
+
+        // Validate user data
+        const response = await axios.get(`${BASE_URL}/TaskListByStatus/${userData}`, Headers);
+        if (response.data.status === "error") {
+            const msg = response.data.message || "Unauthorized ";
+            showWarning(msg);
+
+            // Hide loader
+            store.dispatch(hideLoader());
+
+            throw new Error(msg);
+        }
+
+        if(response.data.status === "success") {
+
+                store.dispatch(setNewTasks(response.data['data']));
+                 // store.dispatch(setCompleteTasks(response.data['data']));
+
+        }
+
+        else {
+            showWarning("Something went wrong!");
+        }
+
+        // Hide loader
+        store.dispatch(hideLoader());
 
     } catch (error) {
         const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";

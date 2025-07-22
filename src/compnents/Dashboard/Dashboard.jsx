@@ -20,50 +20,6 @@ const Dashboard = () => {
 
 
 
-
-
-                        {/*<div className="col-lg-3">*/}
-                        {/*    <div className="card">*/}
-                        {/*        <div className="card-header">*/}
-                        {/*            <h1>Task Name</h1>*/}
-                        {/*        </div>*/}
-                        {/*        <div className="card-body">*/}
-                        {/*            sdfsdf*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-lg-3">*/}
-                        {/*    <div className="card">*/}
-                        {/*        <div className="card-header">*/}
-                        {/*            <h1>Task Name</h1>*/}
-                        {/*        </div>*/}
-                        {/*        <div className="card-body">*/}
-                        {/*            sdfsdf*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-lg-3">*/}
-                        {/*    <div className="card">*/}
-                        {/*        <div className="card-header">*/}
-                        {/*            <h1>Task Name</h1>*/}
-                        {/*        </div>*/}
-                        {/*        <div className="card-body">*/}
-                        {/*            sdfsdf*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-lg-3">*/}
-                        {/*    <div className="card">*/}
-                        {/*        <div className="card-header">*/}
-                        {/*            <h1>Task Name</h1>*/}
-                        {/*        </div>*/}
-                        {/*        <div className="card-body">*/}
-                        {/*            sdfsdf*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-
-
                     </div>
                 </div>
             </section>
