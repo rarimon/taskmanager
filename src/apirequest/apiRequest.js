@@ -2,8 +2,9 @@ import axios   from "axios";
 import {showSuccess, showWarning} from "../helper/AlertHelper.js";
 import {hideLoader, showLoader} from "../redux/state-slice/settingSlice.js";
 import store from "../redux/store/store.js";
-import {setToken} from "../helper/SessionHelper.js";
+import {getToken, setToken} from "../helper/SessionHelper.js";
 
+const Token=getToken();
 const BASE_URL = "https://task-manger-rest-api-project.onrender.com/api/v1";
 
 //user registration
@@ -63,6 +64,47 @@ export const LoginUser = async (userData) => {
         // Store user data in localStorage
          let token = response.data.token;
          setToken(token);
+        return response.data;
+
+    } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
+        showWarning(errorMsg);
+        // Hide loader
+        store.dispatch(hideLoader());
+        throw error;
+    }
+
+}
+
+
+
+//create task
+export const createTask = async (userData) => {
+    try {
+        // show loader
+        store.dispatch(showLoader());
+
+        // Check if token is available
+        let Headers = {
+            headers: {token: Token}
+        }
+
+        // Validate user data
+        const response = await axios.post(`${BASE_URL}/CreateTask`, userData, Headers);
+        if (response.data.status === "error") {
+            const msg = response.data.message || "Task Create failed";
+            showWarning(msg);
+
+            // Hide loader
+            store.dispatch(hideLoader());
+
+            throw new Error(msg);
+        }
+
+        showSuccess("Task Create successful!");
+        // Hide loader
+        store.dispatch(hideLoader());
+
         return response.data;
 
     } catch (error) {

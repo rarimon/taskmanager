@@ -1,7 +1,56 @@
 import React, {Fragment} from 'react';
-import {NavLink} from "react-router";
+import {NavLink, useNavigate} from "react-router";
+import {isEmpty} from "../../helper/FormHelper.js";
+import {showError} from "../../helper/AlertHelper.js";
+import {createTask} from "../../apirequest/apiRequest.js";
 
 const CreateTask = () => {
+
+
+    const Navigate=useNavigate();
+
+
+    // State to hold form data
+    const [formData, setFormData] = React.useState({
+        title: '',
+        description: '',
+        status: 'New'
+    });
+
+    // Handler for input changes
+    const inputHandler=(e)=>{
+        const {value, name} = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    }
+
+
+    // Handler for form submission
+    const formSubmit=async (e)=>{
+        e.preventDefault();
+
+        // form validation
+        if(isEmpty(formData.title)){
+            showError("Title is required");
+        }
+        else if(isEmpty(formData.description)){
+            showError("Description is required");
+        }
+
+        else {
+            try {
+                // Assuming you have a function to create a task
+                await createTask(formData);
+                Navigate("/new")
+            } catch (error) {
+
+            }
+        }
+
+    }
+
 
 
     return (
@@ -14,14 +63,15 @@ const CreateTask = () => {
                                 <h1>Create Task</h1>
                             </div>
                             <div className="card-body">
-                                <form>
+
+                                <form onSubmit={formSubmit}>
                                     <div className="mb-3">
                                         <label htmlFor="exampleInputEmail1" className="form-label">Title</label>
-                                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                                        <input onChange={inputHandler} name="title"  type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="exampleFormControlTextarea1" className="form-label">Description</label>
-                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea onChange={inputHandler} name="description" className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                     </div>
 
                                     <div className="mb-3 text-center">
@@ -30,6 +80,7 @@ const CreateTask = () => {
                                     </div>
 
                                 </form>
+
                             </div>
                         </div>
                     </div>
