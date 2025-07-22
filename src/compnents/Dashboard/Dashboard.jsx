@@ -5,7 +5,7 @@ const Dashboard = () => {
     return (
         <Fragment>
 
-            <section className="w-100 vh-100 d-flex justify-content-center  bg-secondary ">
+            <section className="w-100 vh-100 d-flex justify-content-center ">
                 <div className="container mt-5">
                     <div className="row">
                         <h1 className="mb-5">Welcome To Dashboard</h1>

@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import {Link, NavLink} from "react-router";
 import {getToken} from "../../helper/SessionHelper.js";
+import {showSuccess} from "../../helper/AlertHelper.js";
 
 const Token=getToken();
 
@@ -8,13 +9,16 @@ const Token=getToken();
 const MainLayout = (props) => {
 
     // Function to handle logout
-    const LogoutBtn=()=>{
-        // Clear the token from session storage
+    const LogoutBtn = () => {
         localStorage.removeItem("token");
-        // Redirect to login page
-        window.location.href = "/login";
 
-    }
+        showSuccess("Logout successful!");
+
+        // Wait briefly so toast can be seen before redirect
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 1000);
+    };
 
 
     return (
