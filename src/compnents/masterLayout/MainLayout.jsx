@@ -10,7 +10,7 @@ const MainLayout = (props) => {
 
     // Function to handle logout
     const LogoutBtn = () => {
-        localStorage.removeItem("token");
+        localStorage.clear();
 
         showSuccess("Logout successful!");
 
