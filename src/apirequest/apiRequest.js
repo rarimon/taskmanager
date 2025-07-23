@@ -3,7 +3,8 @@ import {showSuccess, showWarning} from "../helper/AlertHelper.js";
 import {hideLoader, showLoader} from "../redux/state-slice/settingSlice.js";
 import store from "../redux/store/store.js";
 import {getToken, setToken} from "../helper/SessionHelper.js";
-import {setCompleteTasks, setNewTasks} from "../redux/state-slice/taskSlice.js";
+import {setCancelTasks, setCompleteTasks, setNewTasks} from "../redux/state-slice/taskSlice.js";
+import {setSummary} from "../redux/state-slice/summarySlice.js";
 
 const Token=getToken();
 const BASE_URL = "https://task-manger-rest-api-project.onrender.com/api/v1";
@@ -129,6 +130,8 @@ export const Tasklist= async (userData) => {
 
         // Validate user data
         const response = await axios.get(`${BASE_URL}/TaskListByStatus/${userData}`, Headers);
+
+
         if (response.data.status === "error") {
             const msg = response.data.message || "Unauthorized ";
             showWarning(msg);
@@ -141,8 +144,16 @@ export const Tasklist= async (userData) => {
 
         if(response.data.status === "success") {
 
-                store.dispatch(setNewTasks(response.data['data']));
-                // store.dispatch(setCompleteTasks(response.data['data']));
+
+            const allTasks = response.data.data;
+            const newTasks = allTasks.filter(task => task.status === "New");
+            const completeTasks = allTasks.filter(task => task.status === "Complete");
+            const CancelTasks = allTasks.filter(task => task.status === "Cancel");
+
+            store.dispatch(setNewTasks(newTasks));
+            store.dispatch(setCompleteTasks(completeTasks));
+            store.dispatch(setCancelTasks(CancelTasks));
+
 
         }
 
@@ -152,6 +163,93 @@ export const Tasklist= async (userData) => {
 
         // Hide loader
         store.dispatch(hideLoader());
+
+    } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
+        showWarning(errorMsg);
+        // Hide loader
+        store.dispatch(hideLoader());
+        throw error;
+    }
+
+}
+
+
+
+
+//CountTask
+export const countTask= async () => {
+    try {
+        // show loader
+        store.dispatch(showLoader());
+
+        // Validate user data
+        const response = await axios.get(`${BASE_URL}/CountTask`, Headers);
+
+        if (response.data.status === "error") {
+            const msg = response.data.message || "Unauthorized ";
+            showWarning(msg);
+
+            // Hide loader
+            store.dispatch(hideLoader());
+
+            throw new Error(msg);
+        }
+
+        if(response.status===200) {
+            store.dispatch(setSummary(response.data['data']));
+            // Hide loader
+            store.dispatch(hideLoader());
+
+        }
+
+        else {
+            showWarning("Something went wrong!");
+        }
+
+
+    } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
+        showWarning(errorMsg);
+        // Hide loader
+        store.dispatch(hideLoader());
+        throw error;
+    }
+
+}
+
+
+
+//Delete Task
+export const countTask= async (id) => {
+    try {
+        // show loader
+        store.dispatch(showLoader());
+
+        // Validate user data
+        const response = await axios.get(`${BASE_URL}/DeleteTask/${id}`, Headers);
+
+        if (response.data.status === "error") {
+            const msg = response.data.message || "Unauthorized ";
+            showWarning(msg);
+
+            // Hide loader
+            store.dispatch(hideLoader());
+
+            throw new Error(msg);
+        }
+
+        if(response.status===200) {
+            store.dispatch(setSummary(response.data['data']));
+            // Hide loader
+            store.dispatch(hideLoader());
+
+        }
+
+        else {
+            showWarning("Something went wrong!");
+        }
+
 
     } catch (error) {
         const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
