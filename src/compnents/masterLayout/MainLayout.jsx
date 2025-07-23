@@ -24,7 +24,8 @@ const MainLayout = (props) => {
 
     return (
         <Fragment>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary ">
+
+            {Token && (<nav className="navbar navbar-expand-lg bg-body-tertiary ">
                 <div className="container">
                     <NavLink to={"/"} className="navbar-brand" >
                         Logo
@@ -82,7 +83,8 @@ const MainLayout = (props) => {
                         </div>
                     </div>
                 </div>
-            </nav>
+            </nav>) }
+
             {props.children}
 
         </Fragment>
