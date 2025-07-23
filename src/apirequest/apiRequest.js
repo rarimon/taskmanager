@@ -221,7 +221,7 @@ export const countTask= async () => {
 
 
 //Delete Task
-export const countTask= async (id) => {
+export const DeleteTask= async (id) => {
     try {
         // show loader
         store.dispatch(showLoader());
@@ -229,25 +229,24 @@ export const countTask= async (id) => {
         // Validate user data
         const response = await axios.get(`${BASE_URL}/DeleteTask/${id}`, Headers);
 
+        // Hide loader
+        store.dispatch(hideLoader());
+
         if (response.data.status === "error") {
             const msg = response.data.message || "Unauthorized ";
             showWarning(msg);
-
-            // Hide loader
-            store.dispatch(hideLoader());
-
             throw new Error(msg);
         }
 
         if(response.status===200) {
-            store.dispatch(setSummary(response.data['data']));
+            showSuccess("Task deleted successfully!");
             // Hide loader
-            store.dispatch(hideLoader());
-
+            return true;
         }
 
         else {
             showWarning("Something went wrong!");
+            return false;
         }
 
 

@@ -26,9 +26,8 @@ const Dashboard = () => {
                         {
                             countTasks.map((item, index)=>{
                                 return (
-                                    <div className="col-lg-3">
+                                    <div key={index.toString()} className="col-lg-3">
                                         <SummarCard
-                                            key={index}
                                             title={item._id}
                                             total={item.sum}
 

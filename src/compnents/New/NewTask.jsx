@@ -3,6 +3,7 @@ import Card from "../card/Card.jsx";
 import {Tasklist} from "../../apirequest/apiRequest.js";
 import {useSelector} from "react-redux";
 import {DateFormater, DateTimeFormater} from "../../helper/DateFormatHelper.js";
+import {DeleteAlert} from "../../helper/AlertHelper.js";
 
 const NewTask = () => {
 
@@ -14,30 +15,38 @@ const NewTask = () => {
 
     const newTasks =useSelector((state)=>state.tasks.New);
 
+    const DeleteItem = async (id) => {
+        const result = await DeleteAlert(id);
+        if (result === true) {
+            Tasklist("New");
+        }
+    };
+
 
     return (
         <Fragment>
             <div className="container mt-4">
                 <div className="row">
 
-                        {
-                            newTasks.map((item, index)=>{
-                                return (
-                                    <div className="col-lg-3">
+                    {newTasks.length===0 ? <div className="col-lg-12 text-center text-danger"><h4>New Task Empty!</h4></div>:
+                        newTasks.map((item, index)=>{
+                            return (
+                                <div key={index.toString()} className="col-lg-3">
                                     <Card
-                                        key={index}
                                         title={item.title}
                                         description={item.description}
                                         date={DateTimeFormater(item.createdAt)}
                                         onEdit={() => alert('Edit clicked')}
-                                        onDelete={() => alert('Delete clicked')}
+                                        onDelete={()=>{DeleteItem(item._id)}}
                                         status={item.status}
                                         statusbgcolor="bg-info"
                                     />
-                                    </div>
-                                )
-                            })
-                        }
+                                </div>
+                            )
+                        })
+                    }
+
+
 
 
 
