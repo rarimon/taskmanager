@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Link, NavLink} from "react-router";
+import {Link, NavLink, useNavigate} from "react-router";
 import {getToken} from "../../helper/SessionHelper.js";
 import {showSuccess} from "../../helper/AlertHelper.js";
 
@@ -7,6 +7,7 @@ const Token=getToken();
 
 
 const MainLayout = (props) => {
+    const navigate=useNavigate();
 
     // Function to handle logout
     const LogoutBtn = () => {
@@ -16,7 +17,7 @@ const MainLayout = (props) => {
 
         // Wait briefly so toast can be seen before redirect
         setTimeout(() => {
-            window.location.href = "/login";
+            navigate("/login");
         }, 1000);
     };
 
