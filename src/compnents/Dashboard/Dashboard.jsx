@@ -24,7 +24,7 @@ const Dashboard = () => {
                         <h1 className="mb-5">Welcome To Dashboard</h1>
 
                         {
-                            countTasks.map((item, index)=>{
+                            countTasks && countTasks.map((item, index)=>{
                                 return (
                                     <div key={index.toString()} className="col-lg-3">
                                         <SummarCard

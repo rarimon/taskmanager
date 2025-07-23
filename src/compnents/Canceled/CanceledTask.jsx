@@ -3,7 +3,7 @@ import {Tasklist} from "../../apirequest/apiRequest.js";
 import {useSelector} from "react-redux";
 import Card from "../card/Card.jsx";
 import {DateTimeFormater} from "../../helper/DateFormatHelper.js";
-import {DeleteAlert} from "../../helper/AlertHelper.js";
+import {DeleteAlert, updateTaskStatus} from "../../helper/AlertHelper.js";
 
 const CanceledTask = () => {
 
@@ -26,6 +26,14 @@ const CanceledTask = () => {
     };
 
 
+    const updateTask= async (id, status) => {
+        const result = await updateTaskStatus(id,status);
+        if (result === true) {
+            Tasklist("Cancel")
+        }
+    }
+
+
     return (
         <Fragment>
             <div className="container mt-4">
@@ -38,7 +46,7 @@ const CanceledTask = () => {
                                         title={item.title}
                                         description={item.description}
                                         date={DateTimeFormater(item.createdAt)}
-                                        onEdit={() => alert('Edit clicked')}
+                                        onEdit={() => {updateTask(item._id, item.status)}}
                                         onDelete={()=>{DeleteItem(item._id)}}
                                         status={item.status}
                                         statusbgcolor="bg-info"

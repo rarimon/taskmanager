@@ -259,3 +259,43 @@ export const DeleteTask= async (id) => {
     }
 
 }
+
+//Update Task Status
+export const updateTaskByStatus= async (id,status) => {
+    try {
+        // show loader
+        store.dispatch(showLoader());
+
+        // Validate user data
+        const response = await axios.post(`${BASE_URL}/UpdateTaskStatus/${id}/${status}`,null, Headers);
+
+        // Hide loader
+        store.dispatch(hideLoader());
+
+        if (response.data.status === "error") {
+            const msg = response.data.message || "Unauthorized ";
+            showWarning(msg);
+            throw new Error(msg);
+        }
+
+        if(response.status===200) {
+            showSuccess("Status Update successfully!");
+            // Hide loader
+            return true;
+        }
+
+        else {
+            showWarning("Something went wrong!");
+            return false;
+        }
+
+
+    } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
+        showWarning(errorMsg);
+        // Hide loader
+        store.dispatch(hideLoader());
+        throw error;
+    }
+
+}

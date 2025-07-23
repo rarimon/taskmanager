@@ -1,9 +1,9 @@
 import {Slide, toast} from "react-toastify";
 import Swal from "sweetalert2";
-import {DeleteTask} from "../apirequest/apiRequest.js";
+import {DeleteTask, updateTaskByStatus} from "../apirequest/apiRequest.js";
 
 const toastConfig = {
-    position: "top-right",
+    position: "bottom-right",
     autoClose: 2000,
     hideProgressBar: true,
     closeOnClick: false,
@@ -48,6 +48,23 @@ export const DeleteAlert = (id) => {
                 return deleteResult;
             })
         }
+    });
+}
+
+
+//update task status
+export const updateTaskStatus = (id, status) => {
+   return Swal.fire({
+        title: "Change Status",
+        input: "select",
+        inputOptions: {New: "New", Complete: "Complete", Cancel: "Cancel"},
+        inputValue: status,
+
+    }).then((result) => {
+
+       return updateTaskByStatus(id, result.value).then((res) => {
+            return res;
+        })
     });
 }
 
