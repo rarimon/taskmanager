@@ -10,7 +10,7 @@ const CanceledTask = () => {
 
     useEffect(() => {
         (async ()=>{
-            Tasklist("Cancel")
+         await   Tasklist("Cancel")
         })()
     }, []);
 

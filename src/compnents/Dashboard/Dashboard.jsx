@@ -7,7 +7,7 @@ import Card from "../card/Card.jsx";
 const Dashboard = () => {
     useEffect(() => {
         (async ()=>{
-            countTask();
+            await   countTask();
         })()
     }, []);
 

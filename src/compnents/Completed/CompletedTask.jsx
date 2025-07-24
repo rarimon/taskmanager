@@ -9,7 +9,7 @@ const CompletedTask = () => {
 
     useEffect(() => {
         (async ()=>{
-            Tasklist("Complete")
+            await    Tasklist("Complete")
         })()
     }, []);
 

@@ -5,6 +5,7 @@ import store from "../redux/store/store.js";
 import {getToken, setToken} from "../helper/SessionHelper.js";
 import {setCancelTasks, setCompleteTasks, setNewTasks} from "../redux/state-slice/taskSlice.js";
 import {setSummary} from "../redux/state-slice/summarySlice.js";
+import {setUser} from "../redux/state-slice/userSlice.js";
 
 const Token=getToken();
 const BASE_URL = "https://task-manger-rest-api-project.onrender.com/api/v1";
@@ -280,6 +281,88 @@ export const updateTaskByStatus= async (id,status) => {
 
         if(response.status===200) {
             showSuccess("Status Update successfully!");
+            // Hide loader
+            return true;
+        }
+
+        else {
+            showWarning("Something went wrong!");
+            return false;
+        }
+
+
+    } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
+        showWarning(errorMsg);
+        // Hide loader
+        store.dispatch(hideLoader());
+        throw error;
+    }
+
+}
+
+
+//User Profile Details
+export const ProfileDetails= async () => {
+    try {
+        // show loader
+        store.dispatch(showLoader());
+
+        // Validate user data
+        const response = await axios.get(`${BASE_URL}/ProfileDetails`, Headers);
+
+        // Hide loader
+        store.dispatch(hideLoader());
+
+        if (response.data.status === "error") {
+            const msg = response.data.message || "Unauthorized ";
+            showWarning(msg);
+            throw new Error(msg);
+        }
+
+        if(response.status===200) {
+            store.dispatch(setUser(response.data['data']));
+            // Hide loader
+            return true;
+        }
+
+        else {
+            showWarning("Something went wrong!");
+            return false;
+        }
+
+
+    } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong!";
+        showWarning(errorMsg);
+        // Hide loader
+        store.dispatch(hideLoader());
+        throw error;
+    }
+
+}
+
+
+//User Profile udate
+export const ProfileUpdate= async (userData) => {
+    try {
+        // show loader
+        store.dispatch(showLoader());
+
+        // Validate user data
+        const response = await axios.post(`${BASE_URL}/ProfileUpdate`,userData, Headers);
+
+        // Hide loader
+        store.dispatch(hideLoader());
+
+        if (response.data.status === "error") {
+            const msg = response.data.message || "Unauthorized ";
+            showWarning(msg);
+            throw new Error(msg);
+        }
+
+        if(response.status===200) {
+            showSuccess("Profile Update successfully!");
             // Hide loader
             return true;
         }
